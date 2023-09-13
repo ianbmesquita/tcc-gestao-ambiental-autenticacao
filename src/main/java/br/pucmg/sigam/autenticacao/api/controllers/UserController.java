@@ -5,6 +5,7 @@ import br.pucmg.sigam.autenticacao.application.domain.user.models.User;
 import br.pucmg.sigam.autenticacao.application.domain.user.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping
-    private Object saveNewUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        return service.saveNewUser(userRequestDTO);
+    private ResponseEntity<User> saveNewUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        return ResponseEntity.ok().body(service.saveNewUser(userRequestDTO));
     }
 }
