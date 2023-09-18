@@ -18,12 +18,23 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    private ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         return ResponseEntity.ok().body(service.getAllUsers());
     }
 
     @PostMapping
-    private ResponseEntity<UserResponseDTO> saveNewUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> saveNewUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         return new ResponseEntity(service.saveNewUser(userRequestDTO), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> editUserById(@Valid @RequestBody UserRequestDTO userRequestDTO,
+                                                        @PathVariable Long id) {
+        return new ResponseEntity<>(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUserById(@PathVariable Long id) {
+        return ResponseEntity.noContent().build();
     }
 }
