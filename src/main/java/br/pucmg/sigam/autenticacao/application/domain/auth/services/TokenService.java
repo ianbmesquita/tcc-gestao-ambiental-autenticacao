@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class TokenService {
@@ -25,6 +27,7 @@ public class TokenService {
                     .withIssuer("sigam-autenticacao")
                     .withSubject(user.getLogin())
                     .withExpiresAt(generateExpirationDate())
+                    .withClaim("roles", user.getAuthorities().toString())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Error while generating token", exception);

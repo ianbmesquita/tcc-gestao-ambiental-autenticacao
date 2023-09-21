@@ -20,7 +20,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,9 +42,9 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role.equals(UserRole.OUTSOURCED)) {
-            return new ArrayList<>();
+            return List.of(new SimpleGrantedAuthority("ROLE_OUTSOURCED"));
         } else if (this.role.equals(UserRole.ADMIN)) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
