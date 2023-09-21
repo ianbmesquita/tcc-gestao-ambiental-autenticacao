@@ -34,7 +34,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUserById(@PathVariable Long id) {
+    public ResponseEntity deleteUserById(@PathVariable Long id) throws Exception {
+        service.deleteUserById(id);
+
         return ResponseEntity.noContent().build();
     }
 }
