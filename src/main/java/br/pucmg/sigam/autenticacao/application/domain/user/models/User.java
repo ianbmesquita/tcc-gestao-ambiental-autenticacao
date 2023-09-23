@@ -20,27 +20,31 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column
     private String name;
 
+    @Column
     private String login;
 
+    @Column
     private String password;
 
+    @Column
     private UserRole role;
 
+    @Column
     private Boolean locked;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role.equals(UserRole.RESIDENT)) {
-            return new ArrayList<>();
+        if (this.role.equals(UserRole.OUTSOURCED)) {
+            return List.of(new SimpleGrantedAuthority("ROLE_OUTSOURCED"));
         } else if (this.role.equals(UserRole.ADMIN)) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
