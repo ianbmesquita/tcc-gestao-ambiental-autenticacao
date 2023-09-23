@@ -26,4 +26,10 @@ public class UserService {
 
         return mapper.convertUserEntityToUserResponseDTO(user);
     }
+
+    public void deleteUserById(final Long id) throws Exception {
+        var user = repository.findById(id.toString()).orElseThrow(() -> new Exception());
+
+        repository.delete(user);
+    }
 }
