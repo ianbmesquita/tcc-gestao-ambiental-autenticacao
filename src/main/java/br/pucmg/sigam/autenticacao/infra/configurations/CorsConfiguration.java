@@ -14,7 +14,8 @@ public class CorsConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("https://pxk2kufc4a.execute-api.sa-east-1.amazonaws.com")
+//                        .allowedOrigins("http://localhost:3000")
                         .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE")
                         .allowCredentials(true);
             }
