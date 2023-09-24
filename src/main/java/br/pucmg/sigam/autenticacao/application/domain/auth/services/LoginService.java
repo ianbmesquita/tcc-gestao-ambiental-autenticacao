@@ -27,7 +27,6 @@ public class LoginService {
         var user = (User) auth.getPrincipal();
         var token = tokenService.generateToken(user);
 
-
         return authMapper.convertToAuthResponseDTO(user, token);
     }
 

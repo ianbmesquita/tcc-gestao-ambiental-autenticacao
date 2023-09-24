@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.HashMap;
-import java.util.Map;
+
+import static br.pucmg.sigam.autenticacao.utils.Messages.ERRO_GERAR_TOKEN;
 
 @Service
 public class TokenService {
@@ -30,7 +30,7 @@ public class TokenService {
                     .withClaim("roles", user.getAuthorities().toString())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error while generating token", exception);
+            throw new RuntimeException(ERRO_GERAR_TOKEN, exception);
         }
     }
 

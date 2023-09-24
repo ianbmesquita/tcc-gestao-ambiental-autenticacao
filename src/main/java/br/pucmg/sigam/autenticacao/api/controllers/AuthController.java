@@ -17,7 +17,7 @@ public class AuthController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@Valid @RequestBody AuthRequestDTO requestDTO) {
+    public ResponseEntity login(@Valid @RequestBody AuthRequestDTO requestDTO) throws Exception {
         return ResponseEntity.ok().body(loginService.login(requestDTO));
     }
 }
